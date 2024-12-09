@@ -41,22 +41,30 @@
         android:id="@+id/btnEdit"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="20dp"
         android:drawableStart="@drawable/edit"
-        app:layout_constraintStart_toEndOf="@id/tvItemBarang"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="54dp"
-        android:layout_marginLeft="200dp"/>
+        app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/btnDelete"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="16dp"
         android:drawableStart="@drawable/delete"
-        app:layout_constraintStart_toEndOf="@id/btnEdit"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="54dp"
-        android:layout_marginLeft="10dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Update"
+        app:layout_constraintBottom_toTopOf="@+id/btnDelete"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

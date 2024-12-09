@@ -15,6 +15,8 @@ import com.c14220203.belajarroomdatabase.database.daftarBelanjaDB
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         DB = daftarBelanjaDB.getDatabase(this)
 
-        adapterDaftar = adapterDaftar(arDaftar)
+        adapterDaftar = adapterDaftar(arDaftar, this)
         var _rvDaftar = findViewById<RecyclerView>(R.id.rvDaftar)
         _rvDaftar.layoutManager = LinearLayoutManager(this)
         _rvDaftar.adapter = adapterDaftar
@@ -48,13 +50,16 @@ class MainActivity : AppCompatActivity() {
         adapterDaftar.setOnItemClickCallback(
             object : adapterDaftar.OnItemClickCallback {
                 override fun delData(dtBelanja: daftarBelanja) {
-                    CoroutineScope(Dispatchers.IO).async {
+                    CoroutineScope(Dispatchers.IO).launch {
                         DB.fundaftarBelanjaDAO().delete(dtBelanja)
                         val daftar = DB.fundaftarBelanjaDAO().selectAll()
-                        adapterDaftar.isiData(daftar)
+                        withContext(Dispatchers.Main) {
+                            adapterDaftar.isiData(daftar)
+                        }
                     }
                 }
-        })
+            }
+        )
     }
 
     override fun onStart() {
